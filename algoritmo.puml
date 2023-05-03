@@ -1,0 +1,166 @@
+@startuml
+
+skinparam BackgroundColor #31334D
+skinparam DefaultFontColor #E1EBFB
+skinparam TitleFontSize 26
+skinparam DefaultFontName Arial
+skinparam ActivityStartColor #22ffbe
+skinparam Activityendcolor #22ffbe
+skinparam activity{
+    fontcolor #black
+    ArrowColor #ccccca
+
+}
+skinparam BoundaryFontColor white
+skinparam Shadowing true
+skinparam FooterFontSize 20
+skinparam FooterFontColor aquamarine
+
+<style>
+{
+    wbsdiagram {
+        BackgroundColor #31334D
+        :depth() {
+            BackgroundColor black
+        }
+        lineColor #C1C2D5
+        title {
+            fontsize 124px
+        }
+        node{
+            fontcolor white
+            BackgroundColor MidnightBlue
+            :depth(0) {
+                BackgroundColor #373B70
+            }
+            :depth(1) {
+                BackgroundColor #646C9F
+            }
+            :depth(2) {
+                BackgroundColor #057190
+            }
+        }
+    }
+}
+</style>
+
+Title:Algoritmo básico de encryptación
+
+-[hidden]->
+split
+-[hidden]->
+partition "Encriptado"{
+    start
+    split
+    :Obtener array buffer de archivo como **ab**;
+    :Obtener array de 8 bytes de **ab**;
+    split again
+        partition "Convertir texto a array ascii"{
+            :;
+        }
+    end split
+    partition "Contenido"{
+        partition "Cambio de carácteres"{
+            repeat :Iterar array;
+                :Def. **asc** = item.charCodeAt(0);
+                repeat :Iterar carácteres de contraseña;
+                    :Def. **c_pwd** = carácter password;    
+                    :Def. **asc_c** = c_pwd.charCodeAt(0);
+                    :Def. **asc** += **asc_c**;
+                    if (asc>255)then(si)
+                        :asc = asc % 255;
+                    endif
+                repeat while(Siguiente caracter pwd)
+                :Convertir **asc** a char
+                    **String.fromCharCode(asc)**
+                ;
+                :Concatenar resultado a **chars_it**;
+            repeat while (siguiente item)
+        } 
+        :Definir longitud de **chars_it** como **L**;
+        :Definir longitud de **L** como **UL**;
+        :Establecer numero aleatorio como **AL**;
+        :resultado res_it:
+        1 = AL
+        2 = UL+AL
+        3 = left(L,1)
+        4 = right(L,len(L)-1)+1
+        5 = Resultado iteración
+        res_it = **1 & 2 & 3 & 4 & 5**;
+        :Definir longitud de res_it como **R**;
+        :concatenar res + res_it + R;
+    }
+    partition "propiedades"{
+        repeat :bucle en carácteres;
+            :Cefinir **c** como ascii de carácter;
+            :Definir longitud de **c** como **L**;
+            :res_2 = res_2 & L & c;
+        repeat while (siguiente carácter)
+    }
+    :Definir longitud de res_2 como **L**;
+    :res = res & res_2 & L;
+    end
+}
+split again
+-[hidden]->
+partition "Desencriptado"{
+    start
+    partition "propiedades"{
+        :Def. **L** = right(texto,1);
+        :Def. prop = right(texto,**L**+1);
+        :Definir texto = left(texto,len(texto)-**L**);
+        note right#blue
+        Texto resultante ex.:
+        "#9128761291287638"       
+        end note
+        :Definir n = 0;
+        while (n < longitud(prop)) 
+            :Definir **L** = prop.substring(n,1);
+            :Definir **code** = prop.substring(n+1,**L**);
+            :Definir **char** = String.fromCharCode(code);
+            :Concatenar **res_it** = res_it & char;
+            :Definir n = n + L + 1;
+        end while
+    }
+    partition "contenido"{
+        :n=0;
+        while (n<leng(texto))
+            :Definir **AL** = texto.substring(n,1);
+            :Def. **UL** = texto.substring(n+1,1)-**AL**;
+            :Def. **L_1** = texto.substring(n+2,1); 
+            :Def. **L_2** = texto.substring(n+3,1); 
+            :Def. **L** = L_1 & L_2.charCodeAt(0);
+            if(UL=length(L))then(No)
+                -[#red]->
+                #LightPink:Alerta y salida;
+                end
+            else(Si)
+            endif
+            :Definir **chars_it** = texto.substring(n + 4,L);
+            partition "Cambio de carácteres"{
+                :arrRes = [];
+                while(pos = 0;pos <= chars_it.length;pos++)
+                    :Def. **char** = chars_it.substring(pos,1);
+                    :Def. **asc** = **char.charCodeAt(0)**;
+                    repeat :Iterar carácteres de contraseña;
+                        :Def. **cPwd** = carácter password;    
+                        :Def. **asC** = cPwd.charCodeAt(0);
+                        :**asc** = asc - **ascC**;
+                        if (asc<0)then(si)
+                            :asc = 255 + asc;
+                        endif
+                    repeat while(Siguiente caracter pwd)
+                    :arrRes.push(asc);
+                end while            
+            }
+            :n = n + 4 + L + 1;
+        end while
+    }
+    end
+}
+
+end split
+
+
+
+@enduml
