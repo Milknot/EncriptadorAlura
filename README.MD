@@ -32,5 +32,34 @@
 1. Convertir nuevo array a archivo
 1. Descargar archivo
 
-### Algoritmo de encriptación
+### Algoritmo de encriptación personal
 ![Algoritmo de encriptación](out/algoritmo/algoritmo.png)
+
+
+## Pendientes
+
+|Fecha|Estatus|Actividad|
+|-----|-------|---------|
+|09/05|Pendiente|Generar código para códificado Alura|
+|09/05|Pendiente|Generar código para decódificado Alura|
+|09/05|Pendiente|Añadir funcionalidad de códificado personal|
+|09/05|Pendiente|Añadir funcionalidad de decódificado personal|
+|09/05|Pendiente|Mostrar resultados en div|
+|09/05|Pendiente|Añadir elemento para arrastrar archivo|
+|09/05|Pendiente|Generar archivo resultante y realizar pruebas|
+|09/05|Pendiente|Generar biñetas de conversación de encriptado personal|
+|09/05|Pendiente|Añadir funcionalidad de selección de biñetas|
+|09/05|Pendiente|Añadir área para selección de tipo de códificado|
+
+
+## Encryptado personal
+
+### Seguridad
+De forma temporal, esta clase establece una contraseña predeterminada oculta, esto brinda la oportunidad de  agregarse funcionalidad de establecer contraseña por el usuario, sin embargo de momento no se ha añadido esto debido a la complegidad y poco tiempo para completar el reto. sin embargo, se plantea lo siguientes requerimientos al respecto:
+
+1. Algoritmo para recuperación de contraseña:
+    Podría ingresarse la misma contraseña códificada y separada de forma aleatoria mediante metodos de convinado de arrays. la cual mediante una pregunta de seguridad ejecute la iteración para obtener la información.
+2. Métodos de recoperación alternos.
+    - HelpDesk para ejecutar super usuario de recuperación.
+    - Contraseña master de usuario para recuperación de archivos.
+

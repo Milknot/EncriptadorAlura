@@ -5,6 +5,8 @@ function drop(e){
 }
 */
 
+
+//Códificado personal
 async function readfile() {
     let a = await arrbuffer(input.files[0])
     let u8 = new Uint8Array(a)
@@ -13,6 +15,17 @@ async function readfile() {
 }
 
 function arrbuffer(file) {
+    /*
+    funcion arrbufer:
+        Descripción:
+            Convierte una archivo a array buffer para poder manejar el archivo como arreglo de datos
+        parámetros:
+            @file
+        devuelve:
+            objeto arrray buffer
+    */
+
+    //Ejecutamos la respuesta como promesa para esperar que el archivo se termine de cargar y convertir
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -34,6 +47,7 @@ class Error {
 };
 
 class Encrypter {
+    //De forma temporal establecemos una contraseña predeterminada oculta. 
     #passwd;
     constructor() {
         this.#passwd = "ALURA-ONE";
