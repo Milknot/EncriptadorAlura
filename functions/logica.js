@@ -1,12 +1,3 @@
-/*
-input.addEventListener("drop", drop, false);
-function drop(e){
-    console.log(e)
-}
-*/
-
-
-//Códificado personal
 async function readfile() {
     let a = await arrbuffer(input.files[0])
     let u8 = new Uint8Array(a)
@@ -53,6 +44,8 @@ class Encrypter {
         this.#passwd = "ALURA-ONE";
     };
 
+    /*
+    funcion creada para la integración de códificación 
     async encode(array, text) {
         this.result = await new Promise.all([characterChanges(array), setProperties(text)])
 
@@ -62,13 +55,14 @@ class Encrypter {
             };
         };
     };
+    */ 
 
     #encodeCharacter(array) {
         if (!typeof (array) == 'object') {
             return new Error(f`Error en objeto de entrada, se esperaba un objeto en lugar de ${typeof (array)}`, "Entrada inválida");
         };
         let chars_it, asc, res_it;
-        chars_it=''
+        chars_it = ''
         //Iterar elementos del array
         for (let item of array) {
             //Definir el número con el cual vamos a trabajar, si el item no es númerico entonces cambiaremos el calor del elemento a asquí
@@ -87,68 +81,116 @@ class Encrypter {
         };
 
         const L = chars_it.length.toString();
-        let l1 = String.fromCharCode(Number(L.substring(0, 1))+55);
-        let l2 = String.fromCharCode(Number(L.substring(1, L.length))+55);
+        let l1 = String.fromCharCode(Number(L.substring(0, 1)) + 55);
+        let l2 = String.fromCharCode(Number(L.substring(1, L.length)) + 55);
         const UL = L.length;
         const AL = Math.floor(Math.random() * 10);
-        res_it = `${String.fromCharCode(AL+55)}${String.fromCharCode(UL + AL+55)}${l1}${l2}${chars_it}`;
+        res_it = `${String.fromCharCode(AL + 55)}${String.fromCharCode(UL + AL + 55)}${l1}${l2}${chars_it}`;
         return res_it;
     };
 
-    #decodeCharacter(string){
-        console.log(`Decódificando ${string}`);
+    #decodeCharacter(string) {
         let arrRes = [];
         let n = 0;
-        while(n<string.length){
+        while (n < string.length) {
             let l;
-            const AL = string.substring(n,n+1).charCodeAt(0)-55;
-            let l1 = string.substring(n+2,n+3).charCodeAt(0)-55;
-            let l2 = string.substring(n+3,n+4).charCodeAt(0)-55;
-            const UL = string.substring(n+1,n+2).charCodeAt(0)-55-AL;
+            const AL = string.substring(n, n + 1).charCodeAt(0) - 55;
+            let l1 = string.substring(n + 2, n + 3).charCodeAt(0) - 55;
+            let l2 = string.substring(n + 3, n + 4).charCodeAt(0) - 55;
+            const UL = string.substring(n + 1, n + 2).charCodeAt(0) - 55 - AL;
             l = `${l1}${l2}`;
-            if(l2===0){
+            if (l2 === 0) {
                 l = l1;
             };
-            if(!UL==l.toString().length){
-                return new Error(`El tipó de codificación no cóincide ${UL} x ${l.toString().length}`,"Unknown encryption");
+            if (!UL == l.toString().length) {
+                return new Error(`El tipó de codificación no cóincide ${UL} x ${l.toString().length}`, "Unknown encryption");
             };
-            let chars_it = string.substring(n+4,n+4+l);
-            for(let pos=0;pos<chars_it.length;pos++){
-                let char = chars_it.substring(pos,pos+1);
+            let chars_it = string.substring(n + 4, n + 4 + l);
+            for (let pos = 0; pos < chars_it.length; pos++) {
+                let char = chars_it.substring(pos, pos + 1);
                 let asc = char.charCodeAt(0);
-                for(let cPwd of this.#passwd){
+                for (let cPwd of this.#passwd) {
                     let ascC = cPwd.charCodeAt(0);
-                    asc = asc-ascC;
-                    if(asc<0){
-                        asc = 255+asc;
+                    asc = asc - ascC;
+                    if (asc < 0) {
+                        asc = 255 + asc;
                     };
                 };
                 arrRes.push(String.fromCharCode(asc));
             };
-            n +=4+l+1;
+            n += 4 + l + 1;
         };
         return arrRes;
     };
 
     async encode(array, text) {
-        this.result = await new Promise ((resolve,reject)=>{
-            try{
+        this.result = await new Promise((resolve, reject) => {
+            try {
                 resolve(this.#encodeCharacter(array))
-            }catch(error){
-                reject(new Error('Error al intentar ejecutar el encriptado, mensaje de respuesta: '+error,"Encode Error"));
+            } catch (error) {
+                reject(new Error('Error al intentar ejecutar el encriptado, mensaje de respuesta: ' + error, "Encode Error"));
             };
         });
     };
-    async decode(text){
-        this.result = await new Promise ((resolve,reject)=>{
-            try{
+    
+    async decode(text) {
+        this.result = await new Promise((resolve, reject) => {
+            try {
                 resolve(this.#decodeCharacter(text));
-            }catch(error){
-                reject(new Error('Error al intentar ejecutar el des encriptado, mensaje de respuesta: '+error,"Decode Error"));
+            } catch (error) {
+                reject(new Error('Error al intentar ejecutar el des encriptado, mensaje de respuesta: ' + error, "Decode Error"));
             };
         });
     };
 };
 
-let encrypter = new Encrypter();
+//let encrypter = new Encrypter();
 //encrypter.encode("Hola").then(res=>encrypter.decode(encrypter.result).then(res=>console.log(encrypter.result.reduce((res,val)=>res+=val,""))));
+
+
+class AluraDecoder {
+    constructor() {
+        /*
+            La letra "e" es convertida para "enter"
+            La letra "i" es convertida para "imes"
+            La letra "a" es convertida para "ai"
+            La letra "o" es convertida para "ober"
+            La letra "u" es convertida para "ufat"
+        */
+        this.letters = {
+            "a": "ai",
+            "e": "enter",
+            "i": "imes",
+            "o": "ober",
+            "u": "ufat",
+        };
+    }
+    encode(text) {
+        /*
+        */
+        let res = '';
+        //Recorremos cada caracter dentro del texto
+        for (let char of text) {
+            //Si el carácter se encuentra entre las propiedades de la variable "letras", reemplazamos el valor por su correspondiente
+            if (this.letters.hasOwnProperty(char)){
+                char=this.letters[char];
+            }
+            res += char;
+        };
+        return res;
+    };
+    
+    decode(text){
+        /*
+        */
+        //Recorrer palabras dentro del objeto
+        for(let word of Object.values(this.letters)){
+            ///obtenemos los valores y las llaves del objeto
+            let keys = Object.entries(this.letters).find(([key, value]) => value === word);
+
+            //Reemplazamos las palabras ´por las llaves del objeto
+            text = text.replaceAll(keys[1],keys[0]);
+        }
+        return text;
+    };
+};

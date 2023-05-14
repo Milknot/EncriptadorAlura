@@ -97,7 +97,35 @@ uploadQtyChars = (event) => {
         inputText.focus();
     } else {
         chars.innerText = `${l} de 1000`;
-    }
-}
+    };
+};
 
 //read configs
+let button = document.getElementById('run');
+button.addEventListener('click',function(){
+    let ad = new AluraDecoder();
+    let element = document.getElementById("accion");
+    let texto = inputText.textContent;
+    let res;
+    let encrypter = new Encrypter();
+    let version  =document.getElementById('version');
+    let result = document.getElementById("text-result");
+    result.style.display="block"
+    if(version.value==0){
+        if(element.textContent==='Encriptar'){
+            res = ad.encode(texto);
+        }else{
+            res = ad.decode(texto);
+        };
+        result.textContent=res;
+    }else{
+        if(element.textContent==='Encriptar'){
+            encrypter.encode(texto).then(function(){result.textContent=encrypter.result.reduce((res,val)=>res+=val,"")});
+        }else{
+            encrypter.decode(texto).then(function(){result.textContent=encrypter.result.reduce((res,val)=>res+=val,"")});
+        }
+    };
+    let img = document.getElementById("img_wait");
+    img.style.display="none";
+}
+,false);

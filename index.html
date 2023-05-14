@@ -10,8 +10,7 @@
     <script src="./functions/particles.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./styles/mystyle.css">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
@@ -78,17 +77,25 @@
                     <div class="sel-text input-text">
                         <div class="temp no-select" id="temp" aria-selected="false">Ingresa el texto a códificar.</div>
                         <div contenteditable="true" class="content-area" id="text" aria-hidden="true"></div>
-                        <!--
-                        <input type="text" id="input-encrypt" placeholder="Intresa texto a encriptar aquí">
-                        -->
                     </div>
-                    <button>Run</button>
+                    <button id="run">Ejecutar</button>
                 </div>
             </div>
             <div class="result container">
-                <img src="./assets/1.png" alt="Imagen de estado en espera" srcset="">
-                <div class="text-result">
-                    LOREM IPSUM
+                <img src="./assets/1.png" alt="Imagen de estado en espera" id="img_wait">
+                <div class="result-area">
+                    <div class="btn">
+                        <select name="" id="version">
+                            <option value="0" selected>VERSION ALURA</option>
+                            <option value="1">VERSION PERSONAL</option>
+                        </select>
+                        <span class="material-symbols-outlined no-select">
+                            content_copy
+                            </span>
+                    </div>
+                    <div class="text-result" id="text-result">
+                        LOREM IPSUM
+                    </div>
                 </div>
             </div>
         </div>
@@ -102,8 +109,10 @@
         <hr>
         <section class="attributes">
             <h2>Attributes</h2>
-            <a href="https://www.flaticon.com/free-icons/github" title="github icons">Github icons created by Dave Gandy - Flaticon</a>
-            <a href="https://www.flaticon.com/free-icons/linkedin" title="linkedin icons">Linkedin icons created by riajulislam - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/github" title="github icons">Github icons created by Dave Gandy
+                - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/linkedin" title="linkedin icons">Linkedin icons created by
+                riajulislam - Flaticon</a>
         </section>
     </footer>
     <script src="./functions/logica.js"></script>

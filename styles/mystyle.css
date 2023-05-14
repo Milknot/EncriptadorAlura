@@ -514,7 +514,7 @@ main .container {
 }
 
 .input-area button:hover {
-    animation: zoom 800ms alternate infinite  ;
+    animation: zoom 800ms alternate infinite;
 }
 
 @keyframes zoom{
@@ -523,18 +523,73 @@ main .container {
     }
 }
 
-
 .result {
     width: 30%;
     max-height: 100%;
     text-align: center;
     position: relative;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
-.result div{
-    position: absolute;
-    top: 5px;
-    display: none;
+.result-area{
+    position: relative;
+    /*display: none;*/
+    padding: 15px;
+    height: 100%;
+}
+
+.result-area .btn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 0 15px;
+}
+
+.result-area select{
+    border-radius: 1em;
+    padding: 5px;
+    width: 100%;
+    align-self: center;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+    background-color: var(--bg-2th);
+    color: var(--font-1th);
+    border-radius: 1em;
+    display: flex;
+    cursor: pointer;
+    align-self: center;
+    padding: 5px;
+    margin: 0 0 0 10px;
+    transition: all 200ms;
+}
+
+.material-symbols-outlined:hover{
+    background-color: #4455bb;
+    color: white;
+    transform: scale(1.2);
+}
+
+.material-symbols-outlined:active{
+    color: greenyellow;
+}
+
+.text-result{
+    padding: auto;
+    text-align: left;
+    background-color: var(--bg-2th);
+    color: var(--font-1th);
+    height: 80%;
+    border-radius: 1em;
+    padding: 15px;
+    overflow: hidden auto;
+    word-wrap: break-word;
 }
 
 .result img{
@@ -543,7 +598,7 @@ main .container {
     object-fit:cover;
     border-radius: 1em;
     opacity: .7;
-
+    display: none;
 }
 
 footer {
@@ -554,12 +609,17 @@ footer {
     padding: 30px;
     text-align: center;
     background: linear-gradient(var(--bg-1th),var(--bg-3th));
+    box-sizing: border-box;
 }
 
 .info{
     display: block;
     text-align: center;
     word-spacing: 5px;
+}
+
+.info img:hover{
+    animation: zoom 800ms alternate infinite;
 }
 
 .ico{
@@ -584,6 +644,7 @@ footer {
     color: inherit;
     margin: 10px;
 }
+
 
 footer hr{
     border-color: #00ffff;
@@ -642,10 +703,11 @@ footer hr{
         min-height: 300px;
         z-index: 0;
         opacity: 1;
+        animation: none;
     }
 
     .box{
-        margin: 0 0 30px;
+        margin: 0 0 60px;
     }
 
     .input-area{
@@ -669,5 +731,11 @@ footer hr{
     }
     .attributes :not(h2){
         font-size: small;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .result img{
+        width: 100%;
     }
 }
