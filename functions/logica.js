@@ -227,7 +227,6 @@ class Loader extends Modal{
 
     #printResult() {
         this.result.textContent = this.target.result;
-        this.a("#img_wait").classList.toggle("hidden");
     };
 
     #startAnimation(){
@@ -278,8 +277,6 @@ class Loader extends Modal{
         res.then(() => { this.#printResult(); });
 
         //result.textContent = res;
-        let img = document.getElementById("img_wait");
-        img.style.display = "none";
 
     };
 
@@ -303,14 +300,21 @@ class Loader extends Modal{
 
     close(hide=null){
         let img = this.a("#img_wait");
+        let resArea = this.a(".result-area");
         if(hide){
-            if(!img.classList.contains("hidden"))return;
+            if(img.classList.contains("hidden")){
+                this.a("#img_wait").classList.toggle("hidden");
+            }
+            if(this.a(".result-area").classList.contains("hidden")){
+                this.a(".result-area").classList.toggle("hidden");
+            }
+            return;
         }
         this.a("#img_wait").classList.toggle("hidden");
         if(!img.classList.contains("hidden")){
             this.a(".result-area").classList.toggle("hidden")
         }else{
-            setTimeout(()=>{this.a(".result-area").classList.toggle("hidden")},800)
+            setTimeout(()=>{resArea.classList.toggle("hidden")},800)
         }
         document.querySelector(".modal").style.display = "none";
     };

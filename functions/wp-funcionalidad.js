@@ -76,12 +76,14 @@ let popUp = new PopUp();
 
     let mode = document.getElementById("mode")
     mode.addEventListener("click", function () {
+        loader.close(true);
         switchAction(mode.checked);
     }, false)
 
     //Cambio de contador de carácterres
     inputText.addEventListener('keyup', function () {
-        uploadQtyChars()
+        loader.close(true);
+        uploadQtyChars();
     }, false)
 
     uploadQtyChars = () => {
@@ -102,7 +104,6 @@ let popUp = new PopUp();
         } else {
             chars.innerText = `${l} de 1000`;
         };
-        loader.close(true)
     };
 
     document.getElementById('run').addEventListener('click', function () {
