@@ -1,4 +1,4 @@
-export let animationsConfig = {
+let animationsConfig = {
     chars: {
         "autoPlay": true,
         "background": {
