@@ -260,8 +260,8 @@ class Loader extends Modal{
                 },
             });
             return;
-        }
-        this.continue=false
+        };
+        this.continue=false;
         this.a(".modal").style.display = "flex";
         this.setContext({ title: "Cargando..." });
         this.result.style.display = "flex";
@@ -290,11 +290,31 @@ class Loader extends Modal{
          * @param {boolean} enableButton el cual establece la propiedad dissabled del modal para evitar
          * una salida anticipada.
          */
-
-        this.a("#modal-title").textContent = title;
+        let etitle = this.a("#modal-title")
         this.a(".modal-content").style.display = modal;
         this.a(".succes").style.display = success;
         this.a(".modal-btn").disabled = disabled;
+
+        //Animación del texto
+        console.log("animando texto");
+        var letras = title.split("");
+        etitle.innerHTML = "";
+        
+        letras.forEach(function(letra) {
+          let span = document.createElement("span");
+          span.textContent = letra;
+          etitle.appendChild(span);
+        });
+        
+        let contador = 0;
+        let intervalo = setInterval(function() {
+          if (contador >= letras.length) {
+            clearInterval(intervalo);
+            return;
+          }; 
+          etitle.children[contador].style.opacity = 1;
+          contador++;
+        }, 100);
 
     };
 
@@ -311,8 +331,11 @@ class Loader extends Modal{
             return;
         }
         this.a("#img_wait").classList.toggle("hidden");
+        this.a(".result-area").classList.toggle("hidden")
+        document.querySelector(".modal").style.display = "none";
+        return
         if(!img.classList.contains("hidden")){
-            this.a(".result-area").classList.toggle("hidden")
+            
         }else{
             setTimeout(()=>{resArea.classList.toggle("hidden")},800)
         }

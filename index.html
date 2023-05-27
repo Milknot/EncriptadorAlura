@@ -84,19 +84,17 @@
             </div>
             <div class="result container">
                 <div class="result-head">
+                    <select name="" id="version">
+                        <option value="0" selected>VERSION ALURA</option>
+                        <option value="1">VERSION PERSONAL</option>
+                    </select>
                     <span class="more-info"><a href="#info"></a></span>
                 </div>
                 <img src="./assets/1.png" alt="Imagen de estado en espera" id="img_wait">
                 <div class="result-area">
-                    <div class="btn">
-                        <select name="" id="version">
-                            <option value="0" selected>VERSION ALURA</option>
-                            <option value="1">VERSION PERSONAL</option>
-                        </select>
-                        <span class="material-symbols-outlined copy no-select" id="btn-copy">
-                            content_copy
-                            </span>
-                    </div>
+                    <span class="material-symbols-outlined copy no-select" id="btn-copy">
+                        content_copy
+                    </span>
                     <div class="text-result" id="text-result"></div>
                 </div>
             </div>
@@ -129,7 +127,9 @@
         <canvas id="modal-canvas">
         </canvas>
         <div class="container">
-            <div class="title" id="modal-title">Cargando...</div>
+            <div class="modal-title">
+                <p id="modal-title">Cargando...</p>
+            </div>
             <hr>
             <div class="modal-content">
                 <span style="--i:0;"></span>

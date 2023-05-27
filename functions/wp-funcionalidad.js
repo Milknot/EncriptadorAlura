@@ -37,8 +37,8 @@ let popUp = new PopUp();
 
     if (currentTheme) {
         document.documentElement.setAttribute('data-theme', currentTheme);
-        if (currentTheme === '') {
-            document.querySelectorAll("#theme").forEach(item => { item.checked = true });
+        if (currentTheme === 'light') {
+            document.querySelectorAll("#theme").forEach(item => { item.checked = false });
         }
     }
 
@@ -106,7 +106,12 @@ let popUp = new PopUp();
         };
     };
 
+    document.querySelector("#version").addEventListener('click',function(){
+        loader.close(true);
+    })
+
     document.getElementById('run').addEventListener('click', function () {
+        loader.close(true)
         loader.start();
     });
 
@@ -148,4 +153,5 @@ let popUp = new PopUp();
     document.querySelector("#close-popup").addEventListener('click', function () {
         popUp.hide()
     });
+
 })()

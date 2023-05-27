@@ -11,6 +11,7 @@
     --ok-font: #272727 ;
     --alert-bg: #bb0044;
     --alert-font: #ffeeee;
+    --accent:#00ffff;
 }
 
 [data-theme="light"] {
@@ -22,6 +23,7 @@
     --font-2th: #727171;
     --bg-light-top: #fbfbfb;
     --bg-light-bottom: #8b8b8b;
+    --accent:#4488ff;
 }
 
 body {
@@ -147,6 +149,11 @@ header .row {
 .switch {
     position: relative;
     display: inline-block;
+    transition: all 200ms;
+}
+
+.switch:hover{
+    transform: scale(1.2);
 }
 
 .switch-theme {
@@ -200,11 +207,15 @@ header .row {
 
 .switch-theme input:checked+.slider {
     content: "ss";
-    background: linear-gradient(#4455bb, 70%, #242428);
+    background: radial-gradient(circle at left,rgba(255,255,255,.1),25%,rgba(0,255,255,.8),30%,#004499 ),
+    linear-gradient(white,50%,gray);
+    border: 1px solid rgba(0,255,255,.8);
 }
 
-.switch-theme .slider {
-    background: linear-gradient(#44aaff, 70%, #eeeeff);
+.switch-theme .slider {    
+    background: radial-gradient(circle at right,rgb(255,255,100),20%,rgba(255,150,0,.8),30%,#44aaff )
+    ;
+    border: 1px solid gray;
 }
 
 .switch-theme .slider:before {
@@ -365,7 +376,7 @@ main .container {
 }
 
 .more-info a:hover {
-    color: blue;
+    color: var(--accent);
 }
 
 .box section {
@@ -542,40 +553,46 @@ button:hover {
     margin-bottom: 15px;
 }
 
-select{
+.result-head select {
+    border-radius: 1em;
+    padding: 5px;
+    width: 80%;
+    align-self: center;
     cursor: pointer;
+}
+
+#img_wait {
+    width: 50%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 1em;
+    opacity: .7;
+    /*position: absolute;*/
+    z-index: 100;
+    left: 25%;
+    top: 5%;
+    transition: all 2000ms;
 }
 
 .result-area {
     position: relative;
     visibility: hidden;
     opacity: 0;
-    padding: 15px;
-    height: 100%;
-    transition: opacity 2s, visibility 200ms;
+    height: 0;
+    transition: all 2s ease-in-out;
     z-index: -1;
 }
 
 .result-area.hidden{
-    opacity: 1;
+    height: 95%;
     visibility: visible;
-}
-
-.result-area .btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin: 0 0 15px;
-}
-
-.result-area select {
-    border-radius: 1em;
-    padding: 5px;
-    width: 100%;
-    align-self: center;
+    opacity: 1;
 }
 
 .copy{
+    position: absolute;
+    right: 15px;
+    top: 15px;
     background-color: var(--bg-2th);
     color: var(--font-1th);
     border-radius: 1em;
@@ -596,7 +613,7 @@ select{
 }
 
 .copy:hover {
-    background-color: #4455bb;
+    background-color: var(--accent);
     color: white;
     transform: scale(1.2);
 }
@@ -606,28 +623,26 @@ select{
 }
 
 .text-result {
-    padding: auto;
     text-align: left;
     background-color: var(--bg-2th);
     color: var(--font-1th);
-    height: 80%;
+    height: 77%;
     border-radius: 1em;
-    padding: 15px;
     overflow: hidden auto;
     word-wrap: break-word;
+    word-break: break-word;
+    letter-spacing: 2px;
+    padding: 70px 15px 0px 15px;
 }
 
-#img_wait {
-    width: 50%;
-    height: 90%;
-    object-fit: cover;
-    border-radius: 1em;
-    opacity: .7;
+.text-result::before{
+    content: "";
     position: absolute;
-    z-index: 100;
-    left: 25%;
-    top: 5%;
-    transition: all 1000ms;
+    height: 1px;
+    width: 93%;
+    opacity: 0.7;
+    top: 55px;
+    border: 1px solid var(--accent);
 }
 
 footer {
@@ -680,7 +695,7 @@ footer {
 
 
 footer hr {
-    border-color: #00ffff;
+    border-color: var(--accent);
 }
 
 .pop-up {
@@ -824,23 +839,20 @@ footer hr {
     }
 }
 
-.container .title {
+.modal-title {
     font-size: xx-large;
-    animation: typing 2s steps(3) infinite;
+    width: 100%;
     white-space: nowrap;
-    overflow: hidden;
     /*border-right: .15em solid orange;*/
-    display: inline-block;
 }
 
-@keyframes typing {
-    0% {
-        width: 31%;
-    }
-
-    80%,100% {
-        width: 37%;
-    }
+.modal-title p {
+    font-size: 36px;
+  }
+  
+.modal-title p span {
+    opacity: 0;
+    transition: opacity 500ms;
 }
 
 .popup{
@@ -939,7 +951,7 @@ footer hr {
         z-index: 0;
         opacity: 1;
         animation: none;
-        height: max-content;
+        /*height: max-content;*/
     }
 
     .box {
@@ -967,11 +979,12 @@ footer hr {
         min-height: 350px;
     }
 
-    .result img {
-        position: relative;
-        left: 0;
-        margin: auto auto;
-        height: 450px;
+    #img_wait{
+        height: 400px;
+    }
+
+    #img_wait.hidden {
+        height: 0px;
     }
 
     footer {
